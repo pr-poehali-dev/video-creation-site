@@ -56,19 +56,23 @@ export default function Index() {
   const recommendedVideos = videos.filter(v => v.id !== selectedVideo?.id).slice(0, 4);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
       <Header />
       <Sidebar />
       
-      <main className="ml-64 mt-14 p-6">
+      <main className="ml-72 mt-[88px] p-8">
         {!selectedVideo ? (
           <>
-            <div className="flex gap-3 mb-6 overflow-x-auto pb-2">
+            <div className="flex gap-3 mb-8 overflow-x-auto pb-2 scrollbar-hide">
               {categories.map((category) => (
                 <Button
                   key={category}
-                  variant={selectedCategory === category ? 'default' : 'secondary'}
-                  className="whitespace-nowrap"
+                  variant="ghost"
+                  className={`whitespace-nowrap rounded-full px-6 h-10 transition-all ${
+                    selectedCategory === category 
+                      ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg' 
+                      : 'bg-muted/30 hover:bg-muted/60'
+                  }`}
                   onClick={() => setSelectedCategory(category)}
                 >
                   {category}
@@ -76,7 +80,7 @@ export default function Index() {
               ))}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {[...videos, ...videos, ...videos].map((video, idx) => (
                 <div key={idx} onClick={() => setSelectedVideo(video)}>
                   <VideoCard {...video} />

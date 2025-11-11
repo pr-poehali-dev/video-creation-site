@@ -23,42 +23,43 @@ export default function VideoCard({
 
   return (
     <Card 
-      className="group cursor-pointer overflow-hidden border-0 bg-transparent transition-all hover:bg-muted/50"
+      className="group cursor-pointer overflow-hidden border border-border/50 bg-card/30 backdrop-blur-sm rounded-2xl transition-all hover:shadow-2xl hover:border-primary/50 hover:-translate-y-1"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative aspect-video overflow-hidden rounded-xl bg-muted">
+      <div className="relative aspect-video overflow-hidden bg-muted">
         <img 
           src={thumbnail} 
           alt={title}
-          className="w-full h-full object-cover transition-transform group-hover:scale-105"
+          className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
         />
-        <div className="absolute bottom-2 right-2 bg-black/90 text-white px-2 py-0.5 rounded text-xs font-medium">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
           {duration}
         </div>
         {isHovered && (
-          <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-            <div className="bg-black/80 rounded-full p-3">
-              <Icon name="Play" size={28} className="text-white" />
+          <div className="absolute inset-0 flex items-center justify-center animate-fade-in">
+            <div className="bg-gradient-to-br from-primary to-accent rounded-full p-4 shadow-2xl animate-scale-in">
+              <Icon name="Play" size={32} className="text-white" />
             </div>
           </div>
         )}
       </div>
       
-      <div className="p-3">
-        <div className="flex gap-3">
-          <div className="flex-shrink-0">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-accent" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <h3 className="font-medium line-clamp-2 mb-1 group-hover:text-primary transition-colors">
-              {title}
-            </h3>
-            <p className="text-sm text-muted-foreground">{channel}</p>
-            <p className="text-xs text-muted-foreground">
-              {views} • {timestamp}
-            </p>
-          </div>
+      <div className="p-4">
+        <h3 className="font-semibold text-base line-clamp-2 mb-2 group-hover:text-primary transition-colors">
+          {title}
+        </h3>
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent shadow-md" />
+          <p className="text-sm font-medium text-foreground">{channel}</p>
+        </div>
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <Icon name="Eye" size={14} />
+          <span>{views}</span>
+          <span>•</span>
+          <Icon name="Clock" size={14} />
+          <span>{timestamp}</span>
         </div>
       </div>
     </Card>
